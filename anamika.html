@@ -406,7 +406,7 @@ section {
   background:none; border:none; color:var(--muted); font-size:1.3rem;
   cursor:pointer; transition:color .2s; line-height:1;
   -webkit-tap-highlight-color:transparent; touch-action:manipulation;
-  padding:6px 8px;
+  padding:10px 14px;
 }
 .m-close:hover { color:var(--gold); }
 
@@ -692,10 +692,14 @@ const isTouchOnly = window.matchMedia('(pointer:coarse)').matches;
 
 /* ── SCROLL PROGRESS ── */
 const pb = document.getElementById('progress-bar');
-window.addEventListener('scroll',()=>{
-  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-  pb.style.transform = `scaleX(${p})`;
-}, {passive:true});
+window.addEventListener('popstate', () => closeModal());
+
+// Modal open hone pe history push kar
+const openModal = () => {
+  overlay.classList.add('open');
+  history.pushState({ modal: true }, '');
+  spawnHearts();
+};, {passive:true});
 
 /* ── PARTICLE CANVAS ── */
 (()=>{
